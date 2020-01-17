@@ -5,14 +5,13 @@ import {
   REDDIT_REDIRECT_URI,
   REDDIT_CLIENT_ID,
   REDDIT_CLIENT_SECRET
-} from "./consts";
+} from "@/utils/consts";
 import axios from "axios";
 
 /**
  * gets access token from reddit
  */
 export function generateRedditAccessToken() {
-  console.log("generating access token");
   return new Promise((resolve, reject) => {
     let code = localStorage.getItem("code");
     const form = new FormData();
@@ -50,8 +49,14 @@ export function generateRedditAccessToken() {
  * saves the access token locally in our app
  */
 export function setRedditAccessToken(access_token) {
-  console.log("setting access token");
   localStorage.setItem("access_token", access_token);
+}
+/**
+ * saves the access token locally in our app
+ */
+export function clearRedditTokens() {
+  localStorage.removeItem("code");
+  localStorage.removeItem("access_token");
 }
 /**
  * returns the access token that we got from reddit
