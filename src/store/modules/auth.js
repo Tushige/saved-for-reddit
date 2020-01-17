@@ -28,7 +28,6 @@ export default {
       })
     },
     signinWithEmailAndPassword(context, { email, password }) {
-      debugger
       return firebase
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.LOCAL)

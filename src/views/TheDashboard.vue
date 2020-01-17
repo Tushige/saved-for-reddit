@@ -31,26 +31,19 @@ export default {
     }
   },
   created() {
-    console.log("[TheDashboard] created");
     let code = this.$route.query.code;
     localStorage.setItem("code", code);
     const hasToken = getRedditToken();
-    console.log(`hastoken: ${hasToken}`);
     if (!hasToken || hasToken === "undefined" || hasToken === "null") {
-      console.log("generating token");
       generateRedditAccessToken()
         .then(() => {
-          this.fetchUser().then(() => {
-            this.isLoading = false;
-          });
+          this.fetchData();
         })
         .catch(function() {
-          console.log(this);
+          console.error("failed to generate reddit access token");
         });
     } else {
-      this.fetchUser().then(() => {
-        this.isLoading = false;
-      });
+      this.fetchData();
     }
   },
   methods: {
@@ -58,8 +51,14 @@ export default {
       this.$router.push("signout");
     },
     ...mapActions({
-      fetchUser: "user/fetchUser"
-    })
+      fetchUser: "user/fetchUser",
+      fetchSubreddits: "user/fetchSubreddits"
+    }),
+    fetchData() {
+      Promise.all([this.fetchUser(), this.fetchSubreddits()]).then(() => {
+        this.isLoading = false;
+      });
+    }
   },
   computed: {
     ...mapGetters({
