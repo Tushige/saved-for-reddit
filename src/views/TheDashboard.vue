@@ -62,10 +62,11 @@ export default {
     },
     ...mapActions({
       fetchUser: "user/fetchUser",
-      fetchSubreddits: "user/fetchSubreddits"
+      fetchSubreddits: "user/fetchSubreddits",
+      fetchSavedPosts: "user/fetchSavedPosts"
     }),
     fetchData() {
-      Promise.all([this.fetchUser(), this.fetchSubreddits()]).then(() => {
+      Promise.all([this.fetchUser(), this.fetchSubreddits(), this.fetchSavedPosts()]).then(() => {
         this.isLoading = false;
       });
     }

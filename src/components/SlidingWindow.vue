@@ -1,15 +1,21 @@
 <template>
   <div class="sliding-window" :class="{ active: isActive }">
     <button @click="close">Close</button>
+    <div v-for="post in getSavedPosts()" :key="post.id">
+      {{ post.title }}
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 export default {
   computed: {
     ...mapState({
       activeSubreddit: state => state.user.activeSubreddit
+    }),
+    ...mapGetters({
+      getSubredditSavedPosts: "user/getSubredditSavedPosts"
     }),
     isActive() {
       return this.activeSubreddit;
@@ -21,6 +27,13 @@ export default {
     }),
     close() {
       this.deselectSubreddit();
+    },
+    getSavedPosts() {
+      if (!this.activeSubreddit) {
+        return [];
+      }
+      const posts = this.getSubredditSavedPosts(this.activeSubreddit.display_name);
+      return posts;
     }
   }
 };
