@@ -6,20 +6,30 @@
         <button @click="signout">Sign out</button>
         <div class="gutter"></div>
         <div class="main-content">
-          <h1> Hi {{username}}</h1>
-          <p class="welcome-text">Tidying orders and relaxes the minds<p>
-            <div class='search-box'>Insert search box here</div>
+          <div class="main-content_header">
+            <h1>Hi {{ username }}</h1>
+            <p class="welcome-text">Tidying orders and relaxes the minds</p>
+            <p></p>
+            <div class="search-box">Insert search box here</div>
           </div>
+          <SubredditList />
         </div>
+      </div>
+      <SlidingWindow />
     </div>
   </div>
 </template>
 <script>
 import { getRedditToken, generateRedditAccessToken } from "@/api/reddit";
-import firebase from "@/utils/firebase";
 import { mapActions, mapGetters } from "vuex";
+import SubredditList from "@/components/SubredditList";
+import SlidingWindow from "@/components/SlidingWindow";
 
 export default {
+  components: {
+    SubredditList,
+    SlidingWindow
+  },
   data() {
     return {
       isLoading: true
