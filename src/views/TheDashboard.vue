@@ -2,7 +2,7 @@
   <div>
     <div v-if="isLoading">Loading...</div>
     <div class="dashboard" v-else>
-      <div class="main-view">
+      <div class="main-view" :class="{ 'shared-view': isSubredditSelected }">
         <button @click="signout">Sign out</button>
         <div class="gutter"></div>
         <div class="main-content">
@@ -15,13 +15,13 @@
           <SubredditList />
         </div>
       </div>
-      <SlidingWindow />
+      <SlidingWindow :is-active="isSubredditSelected" v-on:closed="closeSlidingWindow" />
     </div>
   </div>
 </template>
 <script>
 import { getRedditToken, generateRedditAccessToken } from "@/api/reddit";
-import { mapActions, mapGetters } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import SubredditList from "@/components/SubredditList";
 import SlidingWindow from "@/components/SlidingWindow";
 
@@ -63,22 +63,43 @@ export default {
     ...mapActions({
       fetchUser: "user/fetchUser",
       fetchSubreddits: "user/fetchSubreddits",
-      fetchSavedPosts: "user/fetchSavedPosts"
+      fetchSavedPosts: "user/fetchSavedPosts",
+      deselectSubreddit: "user/deselectSubreddit"
     }),
     fetchData() {
       Promise.all([this.fetchUser(), this.fetchSubreddits(), this.fetchSavedPosts()]).then(() => {
         this.isLoading = false;
       });
+    },
+    closeSlidingWindow() {
+      this.deselectSubreddit();
     }
   },
   computed: {
+    ...mapState({
+      activeSubreddit: state => state.user.activeSubreddit
+    }),
     ...mapGetters({
       getUserProp: "user/getUserProp"
     }),
     username: function() {
       return this.getUserProp("name");
+    },
+    isSubredditSelected() {
+      return this.activeSubreddit ? true : false;
     }
   }
 };
 </script>
-<style scoped></style>
+<style scoped>
+.dashboard {
+  display: flex;
+}
+.main-view {
+  flex-basis: 100%;
+  transition: flex-basis 0.3s ease-out;
+}
+.main-view.shared-view {
+  flex-basis: 70%;
+}
+</style>
