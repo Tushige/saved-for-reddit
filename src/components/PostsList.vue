@@ -1,6 +1,6 @@
 <template>
-  <div class="posts-lists">
-    <PostsListItem v-for="post in getSavedPosts()" :key="post.id" :post="post"></PostsListItem>
+  <div class="posts-list">
+    <PostsListItem v-for="post in savedPosts" :key="post.id" :post="post"></PostsListItem>
   </div>
 </template>
 
@@ -18,18 +18,20 @@ export default {
     }),
     ...mapGetters({
       getSubredditSavedPosts: "user/getSubredditSavedPosts"
-    })
-  },
-  methods: {
-    getSavedPosts() {
-      if (!this.activeSubreddit) {
-        return [];
-      }
-      const posts = this.getSubredditSavedPosts(this.activeSubreddit.display_name);
-      return posts;
+    }),
+    savedPosts() {
+      return this.activeSubreddit ? this.getSubredditSavedPosts(this.activeSubreddit.display_name) : [];
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.posts-list {
+  overflow-y: scroll;
+  width: 100%;
+  height: 100%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+</style>

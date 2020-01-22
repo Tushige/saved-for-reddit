@@ -52,7 +52,6 @@ export default {
   justify-items: start;
   box-shadow: -1px 1px 9px -5px grey;
 }
-
 .author {
   color: gray;
 }

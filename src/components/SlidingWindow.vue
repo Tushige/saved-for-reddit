@@ -1,6 +1,7 @@
 <template>
   <div class="sliding-window" :class="{ active: isActive }">
     <button @click="close" class="close-btn"><i class="fas fa-times"></i></button>
+    <SearchBar/>
     <PostsList />
   </div>
 </template>
@@ -8,10 +9,11 @@
 <script>
 import anime from "animejs";
 import PostsList from "./PostsList";
-
+import SearchBar from "./SearchBar";
 export default {
   components: {
-    PostsList
+    PostsList,
+    SearchBar
   },
   props: {
     isActive: {
@@ -56,13 +58,13 @@ export default {
   top: 0;
   right: -450px;
   box-shadow: 0px 0px 4px -1px grey;
-  overflow: scroll;
+  padding: 15px 0 15px 0;
 }
 .close-btn {
   border: 0;
   font-size: 32px;
   position: relative;
-  left: -44%;
+  left: -55%;
   top: -10px;
   cursor: pointer;
 }

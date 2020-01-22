@@ -6,14 +6,17 @@ export default {
     user: null,
     subreddits: null,
     activeSubreddit: null,
-    savedPosts: null
+    savedPosts: null,
+    searchTerm: null
   },
   getters: {
     getUserProp: state => prop => {
       return state.user[prop];
     },
     getSubredditSavedPosts: state => subreddit => {
-      return state.savedPosts.filter(post => post.subreddit === subreddit);
+      if (!state.searchTerm)
+        return state.savedPosts.filter(post => post.subreddit === subreddit);
+      return state.savedPosts.filter(post => post.subreddit === subreddit && post.title.includes(state.searchTerm))
     }
   },
   actions: {
@@ -42,6 +45,9 @@ export default {
     },
     deselectSubreddit({ commit }) {
       commit("setActiveSubreddit", null);
+    },
+    setSearchTerm({ commit }, searchTerm) {
+      commit('setSearchTerm', searchTerm);
     }
   },
   mutations: {
@@ -56,6 +62,9 @@ export default {
     },
     setSavedPosts(state, posts) {
       state.savedPosts = posts;
+    },
+    setSearchTerm(state, searchTerm) {
+      state.searchTerm = searchTerm
     }
   }
 };
