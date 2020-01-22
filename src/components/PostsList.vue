@@ -17,7 +17,7 @@ export default {
       activeSubreddit: state => state.user.activeSubreddit
     }),
     ...mapGetters({
-      getSubredditSavedPosts: "user/getSubredditSavedPosts"
+      getSubredditSavedPosts: "posts/getSubredditSavedPosts"
     }),
     savedPosts() {
       return this.activeSubreddit ? this.getSubredditSavedPosts(this.activeSubreddit.display_name) : [];
@@ -33,5 +33,9 @@ export default {
   height: 100%;
   margin-top: 25px;
   margin-bottom: 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

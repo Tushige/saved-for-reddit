@@ -1,6 +1,7 @@
 <template>
   <div class="search-bar">
-    <input class="fas fa-search" type="text" placeholder="search title" @input="updateSearchTerm"/>
+    <i class="fas fa-search"></i>
+    <input type="text" placeholder="search title" @input="updateSearchTerm"/>
   </div>
 </template>
 
@@ -27,13 +28,20 @@ export default {
 .search-bar {
   text-align: left;
   margin-left: 15px;
+  position: relative;
 }
 .search-bar input {
   border: 1px solid hotpink;
   border-radius: 10px;
-  padding: 5px 15px;
+  padding: 10px 40px;
 }
 .search-bar input:focus {
   outline: none;
+}
+.fa-search {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 </style>

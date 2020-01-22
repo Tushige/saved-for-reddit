@@ -63,7 +63,7 @@ export default {
     ...mapActions({
       fetchUser: "user/fetchUser",
       fetchSubreddits: "user/fetchSubreddits",
-      fetchSavedPosts: "user/fetchSavedPosts",
+      fetchSavedPosts: "posts/fetchSavedPosts",
       deselectSubreddit: "user/deselectSubreddit"
     }),
     fetchData() {

@@ -44,10 +44,6 @@ export default {
   border: 1px solid hotpink;
   margin: 10px;
   cursor: pointer;
-
-  &.active {
-    background: limegreen;
-  }
 }
 .subreddit-item.active {
   border-color: limegreen;

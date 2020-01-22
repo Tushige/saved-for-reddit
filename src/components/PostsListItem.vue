@@ -38,9 +38,9 @@ export default {
 
 <style scoped>
 .posts-list-item {
-  width: 90%;
+  box-sizing: border-box;
+  width: 99%;
   height: 100px;
-  margin: 0 auto;
   margin-bottom: 25px;
   padding: 7px;
   border-radius: 6px;

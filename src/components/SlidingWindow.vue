@@ -1,7 +1,10 @@
 <template>
   <div class="sliding-window" :class="{ active: isActive }">
     <button @click="close" class="close-btn"><i class="fas fa-times"></i></button>
-    <SearchBar/>
+    <div class="options-container">
+      <SearchBar/>
+      <DropdownMenu/>
+    </div>
     <PostsList />
   </div>
 </template>
@@ -10,10 +13,12 @@
 import anime from "animejs";
 import PostsList from "./PostsList";
 import SearchBar from "./SearchBar";
+import DropdownMenu from "./DropdownMenu";
 export default {
   components: {
     PostsList,
-    SearchBar
+    SearchBar,
+    DropdownMenu
   },
   props: {
     isActive: {
@@ -71,5 +76,11 @@ export default {
 .close-btn:hover {
   color: crimson;
   transition: color 0.3s ease;
+}
+.options-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
