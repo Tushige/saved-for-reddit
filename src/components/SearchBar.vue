@@ -11,7 +11,7 @@ import debounce from "lodash.debounce";
 export default {
   methods: {
     ...mapActions({
-      setSearchTerm: "user/setSearchTerm"
+      setSearchTerm: "posts/setSearchTerm"
     }),
     updateSearchTerm: debounce(function(e) {
       const text = e.target.value;
@@ -27,7 +27,6 @@ export default {
 <style scoped>
 .search-bar {
   text-align: left;
-  margin-left: 15px;
   position: relative;
 }
 .search-bar input {

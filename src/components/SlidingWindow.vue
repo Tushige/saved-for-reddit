@@ -63,13 +63,13 @@ export default {
   top: 0;
   right: -450px;
   box-shadow: 0px 0px 4px -1px grey;
-  padding: 15px 0 15px 0;
+  padding: 15px;
 }
 .close-btn {
   border: 0;
   font-size: 32px;
   position: relative;
-  left: -55%;
+  left: -60%;
   top: -10px;
   cursor: pointer;
 }

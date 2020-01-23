@@ -9,9 +9,24 @@ export default {
   },
   getters: {
     getSubredditSavedPosts: state => subreddit => {
-      if (!state.searchTerm)
-        return state.savedPosts.filter(post => post.subreddit === subreddit);
-      return state.savedPosts.filter(post => post.subreddit === subreddit && post.title.includes(state.searchTerm))
+      let posts = state.savedPosts;
+      if (state.sortParam === 'newest') {
+        posts = state.savedPosts.sort(function (a, b) {
+          return a.created >= b.created ? -1 : 1;
+        })
+      } else if (state.sortParam === 'oldest') {
+        posts = state.savedPosts.sort(function (a, b) {
+          return a.created <= b.created ? -1 : 1;
+        })
+      } else if (state.sortParam === 'top') {
+        posts = state.savedPosts.sort(function (a, b) {
+          return a.score >= b.score ? -1 : 1;
+        })
+      }
+      if (state.searchTerm) {
+        return posts.filter(post => post.subreddit === subreddit && post.title.includes(state.searchTerm))
+      }
+      return posts.filter(post => post.subreddit === subreddit);
     }
   },
   actions: {

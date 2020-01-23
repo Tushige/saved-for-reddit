@@ -1,27 +1,42 @@
 <template>
-  <div class="dropdown-menu-container">
-    <button class="dropdown-menu-btn" @click="toggleMenu">SORT</button>
+  <div class="dropdown-menu-container" v-click-outside="closeMenu" >
+    <button class="dropdown-menu-btn" @click.stop="toggleMenu">SORT</button>
     <div class="dropdown-items" v-show="isOpen">
-      <div class="dropdown-item" @click="setSortParam('date')">date</div>
-      <div class="dropdown-item" @click="setSortParam('top')">top</div>
+      <div class="dropdown-item" @click="sortByParam('oldest')">oldest first</div>
+      <div class="dropdown-item" @click="sortByParam('newest')">newest first</div>
+      <div class="dropdown-item" @click="sortByParam('top')">top</div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import clickOutside from "@/directives/click-outside";
+
 export default {
   data() {
     return {
-      isOpen: false,
-      sortParam: ""
+      isOpen: false
     };
   },
+  directives: {
+    clickOutside
+  },
   methods: {
+    ...mapActions({
+      setSortParam: "posts/setSortParam"
+    }),
+    closeMenu() {
+      this.isOpen = false;
+      console.log("closing menu");
+    },
     toggleMenu() {
+      console.log("toggling meny");
       this.isOpen = !this.isOpen;
     },
-    setSortParam(param) {
-      this.sortParam = param;
+    sortByParam(param) {
+      this.setSortParam(param);
+      this.toggleMenu();
     }
   }
 };
@@ -43,10 +58,14 @@ export default {
 }
 .dropdown-items {
   position: absolute;
-  bottom: -205%;
+  bottom: -200%;
   left: 50%;
   transform: translateX(-50%);
   border: 1px solid hotpink;
+}
+.dropdown-item {
+  cursor: pointer;
+  background: white;
 }
 .dropdown-item:hover {
   color: white;
@@ -54,8 +73,5 @@ export default {
 }
 .dropdown-item:not(:last-child) {
   border-bottom: 1px solid hotpink;
-}
-.dropdown-item {
-  cursor: pointer;
 }
 </style>
