@@ -1,25 +1,17 @@
 <template>
   <div class="search-bar">
     <i class="fas fa-search"></i>
-    <input type="text" placeholder="search title" @input="updateSearchTerm"/>
+    <input type="text" placeholder="search title" @input="inputHandler"/>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import debounce from "lodash.debounce";
 export default {
-  methods: {
-    ...mapActions({
-      setSearchTerm: "posts/setSearchTerm"
-    }),
-    updateSearchTerm: debounce(function(e) {
-      const text = e.target.value;
-      this.setSearchTerm(text);
-    }, 300)
-  },
-  created() {
-    this.debounce = debounce;
+  props: {
+    inputHandler: {
+      type: Function,
+      required: true
+    }
   }
 };
 </script>

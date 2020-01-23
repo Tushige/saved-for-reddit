@@ -10,7 +10,7 @@
             <h1>Hi {{ username }}</h1>
             <p class="welcome-text">Tidying orders and relaxes the minds</p>
             <p></p>
-            <div class="search-box">Insert search box here</div>
+            <SearchBar :input-handler="updateSubredditSearchTerm"/>
           </div>
           <SubredditList />
         </div>
@@ -22,13 +22,16 @@
 <script>
 import { getRedditToken, generateRedditAccessToken } from "@/api/reddit";
 import { mapState, mapActions, mapGetters } from "vuex";
+import SearchBar from "@/components/SearchBar";
 import SubredditList from "@/components/SubredditList";
 import SlidingWindow from "@/components/SlidingWindow";
+import debounce from "lodash.debounce";
 
 export default {
   components: {
     SubredditList,
-    SlidingWindow
+    SlidingWindow,
+    SearchBar
   },
   data() {
     return {
@@ -55,6 +58,7 @@ export default {
     } else {
       this.fetchData();
     }
+    this.debounce = debounce;
   },
   methods: {
     signout() {
@@ -64,7 +68,8 @@ export default {
       fetchUser: "user/fetchUser",
       fetchSubreddits: "user/fetchSubreddits",
       fetchSavedPosts: "posts/fetchSavedPosts",
-      deselectSubreddit: "user/deselectSubreddit"
+      deselectSubreddit: "user/deselectSubreddit",
+      setSubredditSearchTerm: "user/setSubredditSearchTerm"
     }),
     fetchData() {
       Promise.all([this.fetchUser(), this.fetchSubreddits(), this.fetchSavedPosts()]).then(() => {
@@ -73,6 +78,13 @@ export default {
     },
     closeSlidingWindow() {
       this.deselectSubreddit();
+    },
+    updateSubredditSearchTerm: debounce(function(e) {
+      const text = e.target.value;
+      this.setSubredditSearchTerm(text);
+    }, 300),
+    close() {
+      this.$emit("closed");
     }
   },
   computed: {
@@ -101,5 +113,11 @@ export default {
 }
 .main-view.shared-view {
   flex-basis: 70%;
+}
+
+.main-content_header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

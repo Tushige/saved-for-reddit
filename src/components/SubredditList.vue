@@ -18,15 +18,15 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapGetters } from "vuex";
 import SubredditListItem from "./SubredditListItem";
 export default {
   components: {
     SubredditListItem
   },
   computed: {
-    ...mapState({
-      subreddits: state => state.user.subreddits
+    ...mapGetters({
+      subreddits: "user/getSubreddits"
     })
   },
   methods: {

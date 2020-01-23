@@ -2,7 +2,7 @@
   <div class="sliding-window" :class="{ active: isActive }">
     <button @click="close" class="close-btn"><i class="fas fa-times"></i></button>
     <div class="options-container">
-      <SearchBar/>
+      <SearchBar :input-handler="updateSearchTerm"/>
       <DropdownMenu/>
     </div><PostsList/></div>
 </template>
@@ -12,6 +12,8 @@ import anime from "animejs";
 import PostsList from "./PostsList";
 import SearchBar from "./SearchBar";
 import DropdownMenu from "./DropdownMenu";
+import { mapActions } from "vuex";
+import debounce from "lodash.debounce";
 export default {
   components: {
     PostsList,
@@ -42,9 +44,19 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      setSearchTerm: "posts/setSearchTerm"
+    }),
+    updateSearchTerm: debounce(function(e) {
+      const text = e.target.value;
+      this.setSearchTerm(text);
+    }, 300),
     close() {
       this.$emit("closed");
     }
+  },
+  created() {
+    this.debounce = debounce;
   }
 };
 </script>
