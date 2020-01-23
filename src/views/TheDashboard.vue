@@ -7,7 +7,7 @@
         <div class="gutter"></div>
         <div class="main-content">
           <div class="main-content_header">
-            <h1>Hi {{ username }}</h1>
+            <h1 class="title">Hi {{ username }}</h1>
             <p class="welcome-text">Tidying orders and relaxes the minds</p>
             <p></p>
             <SearchBar :input-handler="updateSubredditSearchTerm"/>
@@ -119,5 +119,12 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.title {
+  font-size: 48px;
+  margin-bottom: 0;
+}
+.welcome-text {
+  margin-top: 0;
 }
 </style>

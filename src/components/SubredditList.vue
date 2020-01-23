@@ -2,7 +2,7 @@
   <div>
     <div class="subreddit-list">
       <h3>
-        Subreddits <span class="subreddits_count">{{ subreddits.length }}</span>
+        Subreddits: <span class="subreddits_count">{{ subreddits.length }}</span>
       </h3>
       <div class="subreddit-items">
         <SubredditListItem

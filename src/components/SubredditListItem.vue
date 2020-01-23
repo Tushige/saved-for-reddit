@@ -69,9 +69,8 @@ export default {
 .subreddit-item__title {
   transition: transform 0.3s ease-in;
   font-weight: bold;
-  font-family: "Permanent Marker", cursive;
-  font-size: 24px;
-  /* font-family: "Pacifico", cursive; */
+  font-family: "Libre Franklin", sans-serif;
+  font-size: 18px;
 }
 .subreddit-item:hover .subreddit-item__title {
   transform: scale(1.1);
