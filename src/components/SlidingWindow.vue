@@ -4,9 +4,7 @@
     <div class="options-container">
       <SearchBar/>
       <DropdownMenu/>
-    </div>
-    <PostsList />
-  </div>
+    </div><PostsList/></div>
 </template>
 
 <script>

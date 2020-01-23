@@ -1,5 +1,7 @@
 <template>
   <div class="subreddit-item" :class="{ active: isActive }" @click="clickHandler">
+  <div class="background" :style="{backgroundImage: `url(https://source.unsplash.com/random/150x150?sig=${idx})`}">
+  </div>
     <div class="subreddit-item__title">{{ subreddit.display_name }}</div>
   </div>
 </template>
@@ -10,6 +12,10 @@ export default {
   props: {
     subreddit: {
       type: Object,
+      required: true
+    },
+    idx: {
+      type: Number,
       required: true
     }
   },
@@ -35,15 +41,40 @@ export default {
 
 <style scoped>
 .subreddit-item {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
-  border: 1px solid hotpink;
+  color: #fff;
   margin: 10px;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.background {
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  filter: brightness(0.6);
+  transition: transform 0.3s ease-out;
+  transform: scale(1.1);
+}
+.subreddit-item:hover .background {
+  transform: scale(1);
+}
+.subreddit-item__title {
+  transition: transform 0.3s ease-in;
+  font-weight: bold;
+  font-family: "Permanent Marker", cursive;
+  font-size: 24px;
+  /* font-family: "Pacifico", cursive; */
+}
+.subreddit-item:hover .subreddit-item__title {
+  transform: scale(1.1);
 }
 .subreddit-item.active {
   border-color: limegreen;

@@ -24,7 +24,7 @@ export default {
         })
       }
       if (state.searchTerm) {
-        return posts.filter(post => post.subreddit === subreddit && post.title.includes(state.searchTerm))
+        return posts.filter(post => post.subreddit === subreddit && post.title.toLowerCase().includes(state.searchTerm.toLowerCase()))
       }
       return posts.filter(post => post.subreddit === subreddit);
     }

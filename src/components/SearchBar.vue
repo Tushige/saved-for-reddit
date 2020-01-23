@@ -30,12 +30,13 @@ export default {
   position: relative;
 }
 .search-bar input {
-  border: 1px solid hotpink;
+  border: 1px solid grey;
   border-radius: 10px;
   padding: 10px 40px;
 }
 .search-bar input:focus {
   outline: none;
+  border: 1px solid black;
 }
 .fa-search {
   position: absolute;

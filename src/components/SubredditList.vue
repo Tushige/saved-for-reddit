@@ -6,10 +6,11 @@
       </h3>
       <div class="subreddit-items">
         <SubredditListItem
-          v-for="subreddit in subreddits"
+          v-for="(subreddit, idx) in subreddits"
           :key="subreddit.id"
           :subreddit="subreddit"
           v-on:update="selectSubreddit(subreddit)"
+          :idx="idx"
         />
       </div>
     </div>
@@ -41,7 +42,7 @@ export default {
 
 <style scoped>
 .subreddit-list {
-  max-width: 1150px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .subreddit-items {
