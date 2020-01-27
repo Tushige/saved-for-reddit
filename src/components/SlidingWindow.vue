@@ -88,6 +88,9 @@ export default {
   top: -10px;
   cursor: pointer;
 }
+.close-btn:focus {
+  outline: none;
+}
 .close-btn:hover {
   color: crimson;
   transition: color 0.3s ease;
