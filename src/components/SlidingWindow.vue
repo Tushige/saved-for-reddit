@@ -34,6 +34,11 @@ export default {
           translateX: -450,
           easing: "spring(1, 80, 40, 0)"
         });
+        anime({
+          targets: ".close-btn",
+          left: "-60%",
+          easing: "spring(1, 80, 40, 0)"
+        });
       } else {
         anime({
           targets: ".sliding-window",
@@ -79,7 +84,7 @@ export default {
   border: 0;
   font-size: 32px;
   position: relative;
-  left: -60%;
+  left: -50%;
   top: -10px;
   cursor: pointer;
 }
