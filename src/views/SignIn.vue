@@ -125,13 +125,13 @@ export default {
   outline: none;
   border: 0;
   border-bottom: 2px solid rgb(169, 169, 169);
-  width: 250px;
+  width: 350px;
   height: 30px;
   transition: border 0.3s ease-out;
   padding-left: 5px;
 }
 .form-input:focus {
-  border-bottom-color: rgb(78, 0, 151);
+  border-bottom-color: rgb(255, 132, 0);
 }
 .form-label {
   transition: transform 0.3s ease-out;
@@ -147,19 +147,18 @@ export default {
   left: 5px;
 }
 .submit-btn {
-  border: 2px solid rgb(119, 0, 119);
+  border: 2px solid rgb(255, 132, 0);
   outline: none;
   width: 150px;
   height: 50px;
   cursor: pointer;
-  transition: background-color 0.3s ease-out;
+  transition: transform 0.3s ease-out;
   font-size: 16px;
 
-  background-color: rgb(119, 0, 119);
+  background-color: rgb(255, 132, 0);
   color: white;
 }
 .submit-btn:hover {
-  background-color: white;
-  color: black;
+  transform: scale(1.1);
 }
 </style>
