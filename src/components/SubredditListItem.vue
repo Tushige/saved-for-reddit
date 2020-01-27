@@ -1,13 +1,23 @@
 <template>
-  <div class="subreddit-item" :class="{ active: isActive }" @click="clickHandler">
-  <div class="background" :style="{backgroundImage: `url(https://source.unsplash.com/random/150x150?sig=${idx})`}">
-  </div>
-    <div class="subreddit-item__title">{{ subreddit.display_name }}</div>
-  </div>
+<div class="subredditlistitemcontainer">
+  <transition name="fade">
+    <div v-show="isLoading" class="skeleton-loader subreddit-item">
+      <div class="line-dash"></div>
+    </div>
+  </transition>
+  <transition name="fade">
+    <div v-show="!isLoading" class="subreddit-item" :class="{ active: isActive }" @click="clickHandler">
+      <img class="background" v-bind:src="imageUrl" ref="img"/>
+      <div class="subreddit-item__title">{{ subreddit.display_name }}</div>
+    </div>
+  </transition>
+</div>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import anime from "animejs";
+
 export default {
   props: {
     subreddit: {
@@ -17,7 +27,17 @@ export default {
     idx: {
       type: Number,
       required: true
+    },
+    isLoading: {
+      type: Boolean,
+      required: true
     }
+  },
+  data() {
+    return {
+      imageUrl: `https://source.unsplash.com/random/150x150?sig=${this.idx})`,
+      white_line_pos: 0
+    };
   },
   computed: {
     ...mapState({
@@ -32,9 +52,23 @@ export default {
   },
   methods: {
     clickHandler() {
-      console.log("[subredditListItem] clicked!");
       this.$emit("update");
+    },
+    skeletonLoader() {
+      anime({
+        targets: ".line-dash",
+        left: 400,
+        duration: 1500,
+        loop: true,
+        easing: "cubicBezier(.5, .05, .1, .3)"
+      });
     }
+  },
+  mounted() {
+    this.$refs.img.onload = () => {
+      this.$emit("onImageLoad");
+    };
+    this.skeletonLoader();
   }
 };
 </script>
@@ -77,5 +111,27 @@ export default {
 }
 .subreddit-item.active {
   border-color: limegreen;
+}
+
+.skeleton-loader {
+  background-color: rgb(223, 223, 223);
+}
+.line-dash {
+  position: relative;
+  left: -150%;
+  background: white;
+  height: 150%;
+  width: 15px;
+  filter: blur(25px) brightness(1);
+  transform: rotate(23deg);
+}
+/*load styles*/
+.fade-enter,
+.fade-leave {
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s;
 }
 </style>

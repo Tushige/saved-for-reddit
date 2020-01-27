@@ -28,10 +28,8 @@ export default {
     }),
     closeMenu() {
       this.isOpen = false;
-      console.log("closing menu");
     },
     toggleMenu() {
-      console.log("toggling meny");
       this.isOpen = !this.isOpen;
     },
     sortByParam(param) {
