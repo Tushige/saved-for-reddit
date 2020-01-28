@@ -50,6 +50,14 @@ export function generateRedditAccessToken() {
  */
 export function setRedditAccessToken(access_token) {
   localStorage.setItem("access_token", access_token);
+  api = axios.create({
+    baseURL: REDDIT_API_URL,
+    timeout: 3000,
+    headers: {
+      Authorization: `Bearer ${getRedditToken()}`,
+      "Content-Type": "application/x-www-form-urlencoded"
+    }
+  });
 }
 /**
  * saves the access token locally in our app
@@ -67,7 +75,7 @@ export function getRedditToken() {
 /**
  * API functions
  */
-export const api = axios.create({
+export var api = axios.create({
   baseURL: REDDIT_API_URL,
   timeout: 3000,
   headers: {
@@ -75,7 +83,6 @@ export const api = axios.create({
     "Content-Type": "application/x-www-form-urlencoded"
   }
 });
-
 export function getUser() {
   return api.get(REDDIT_API_URL + "/api/v1/me");
 }

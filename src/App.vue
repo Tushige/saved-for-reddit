@@ -6,15 +6,19 @@
 
 <script>
 export default {
-  name: "app",
-  components: {}
+  name: "app"
 };
 </script>
 
 <style>
-body {
+* {
   margin: 0;
   padding: 0;
+  outline: 0;
+  vertical-align: baseline;
+}
+body {
+  background-color: #fdfdfd;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

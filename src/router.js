@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import SignIn from "@/views/SignIn";
 import TheDashboard from "@/views/TheDashboard";
+import TheAnalytics from '@/views/TheAnalytics';
 import store from '@/store/index'
 import { clearRedditTokens } from '@/api/reddit'
 
@@ -31,6 +32,14 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: TheDashboard,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/analytics",
+    name: "analytics",
+    component: TheAnalytics,
     meta: {
       requiresAuth: true
     }

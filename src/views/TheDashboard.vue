@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div v-if="isLoading">Loading...</div>
-    <div class="dashboard" v-else>
+    <TheHeader/>
+    <div class="dashboard">
       <div class="main-view" :class="{ 'shared-view': isSubredditSelected }">
-        <button @click="signout">Sign out</button>
         <div class="gutter"></div>
         <div class="main-content">
           <div class="main-content_header">
@@ -20,6 +19,7 @@
   </div>
 </template>
 <script>
+import TheHeader from "@/components/TheHeader";
 import { getRedditToken, generateRedditAccessToken } from "@/api/reddit";
 import { mapState, mapActions, mapGetters } from "vuex";
 import SearchBar from "@/components/SearchBar";
@@ -31,7 +31,8 @@ export default {
   components: {
     SubredditList,
     SlidingWindow,
-    SearchBar
+    SearchBar,
+    TheHeader
   },
   data() {
     return {

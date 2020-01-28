@@ -19,9 +19,9 @@
             id="email"
             name="email"
             class="form-input"
-            v-model="email"
-            v-on:focus="isEmailActive = true"
-            v-on:blur="isEmailActive = !!email"/>
+            v-model="form.email"
+            @focus="isEmailActive = true"
+            @blur="isEmailActive = !!form.email"/>
         </div>
         <div class="form-group">
           <label 
@@ -36,12 +36,15 @@
           id="password"
           name="password"
           class="form-input"
-          v-model="password"
-          v-on:focus="isPasswordActive = true"
-          v-on:blur="isPasswordActive = !!password"/>
+          v-model="form.password"
+          @focus="isPasswordActive = true"
+          @blur="isPasswordActive = !!form.password"/>
         </div>
 
-        <input type="submit" class="submit-btn" value="Sign in"/>
+        <input type="submit" class="submit-btn" value="SIGN IN"/>
+        <p v-if="authError" class="error">
+          email or password is incorrect. Please try again!
+        </p>
       </form>
     </div>
   </div>
@@ -54,10 +57,13 @@ import bannerImage from "@/assets/banner_image.jpg";
 export default {
   data() {
     return {
-      email: "",
-      password: "",
+      form: {
+        email: "",
+        password: ""
+      },
       isEmailActive: false,
-      isPasswordActive: false
+      isPasswordActive: false,
+      authError: false
     };
   },
   computed: {},
@@ -66,7 +72,7 @@ export default {
       signinWithEmailAndPassword: "auth/signinWithEmailAndPassword"
     }),
     signin() {
-      this.signinWithEmailAndPassword({ email: this.email, password: this.password })
+      this.signinWithEmailAndPassword({ email: this.form.email, password: this.form.password })
         .then(() => {
           const response_type = "code";
           const state = "123reddit";
@@ -74,8 +80,9 @@ export default {
           const scope = REDDIT_SCOPES;
           window.location.href = `https://www.reddit.com/api/v1/authorize?client_id=${REDDIT_CLIENT_ID}&response_type=${response_type}&state=${state}&redirect_uri=${REDDIT_REDIRECT_URI}&duration=${duration}&scope=${scope}`;
         })
-        .catch(function(error) {
+        .catch(error => {
           console.error(error);
+          this.authError = true;
         });
     }
   }
@@ -88,6 +95,8 @@ export default {
   grid-template-columns: 60% 40%;
   grid-template-rows: 100vh;
   grid-template-areas: "banner form";
+  font-family: "Montserrat", sans-serif;
+  background-color: white;
 }
 .banner {
   grid-area: banner;
@@ -104,6 +113,7 @@ export default {
 }
 .title {
   margin-bottom: 0;
+  color: rgb(61, 61, 61);
 }
 .welcome-text {
   color: rgb(155, 155, 155);
@@ -160,5 +170,8 @@ export default {
 }
 .submit-btn:hover {
   transform: scale(1.1);
+}
+.error {
+  color: red;
 }
 </style>
