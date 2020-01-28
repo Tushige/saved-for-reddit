@@ -20,6 +20,7 @@ export default {
 .search-bar {
   text-align: left;
   position: relative;
+  margin-bottom: 15px;
 }
 .search-bar input {
   border: 1px solid grey;

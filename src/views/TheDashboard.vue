@@ -8,7 +8,6 @@
           <div class="main-content_header">
             <h1 class="title">Hi ThrowMeAway1999</h1>
             <p class="welcome-text">Tidying orders and relaxes the minds</p>
-            <p></p>
             <SearchBar :input-handler="updateSubredditSearchTerm"/>
           </div>
           <SubredditList />
@@ -120,6 +119,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 50px;
 }
 .title {
   font-size: 48px;
@@ -127,5 +127,6 @@ export default {
 }
 .welcome-text {
   margin-top: 0;
+  margin-bottom: 50px;
 }
 </style>
