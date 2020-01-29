@@ -7,7 +7,7 @@
         <div class="main-content">
           <div class="main-content_header">
             <h1 class="title"><span class="title_colored">Hi</span> ThrowMeAway1999</h1>
-            <p class="welcome-text">Tidying orders and relaxes the minds</p>
+            <p class="welcome-text">Tidying orders and relaxes the mind</p>
             <SearchBar :input-handler="updateSubredditSearchTerm"/>
           </div>
           <SubredditList :is-subreddit-selected="isSubredditSelected"/>

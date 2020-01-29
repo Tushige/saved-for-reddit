@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <nav class="header-nav">
-      <img src="@/assets/placeholder_logo.png" @click="$router.go('home')" class="logo nav-item">
+      <router-link :to="{name: 'dashboard'}">
+        <img src="@/assets/placeholder_logo.png" class="logo nav-item">
+      </router-link>
       <router-link class="nav-item nav-btn" :to="{name: 'signout'}"><i class="icon fas fa-sign-out-alt"></i></router-link>
       <router-link class="nav-item nav-btn" :to="{name: 'analytics'}"><i class="icon fas fa-chart-pie"></i></router-link>
     </nav>

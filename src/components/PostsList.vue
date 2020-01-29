@@ -39,12 +39,9 @@ export default {
   overflow-y: scroll;
 }
 .posts-list {
-  overflow-y: scroll;
   width: 100%;
-  height: 100%;
   margin-top: 25px;
-  margin-bottom: 25px;
-
+  padding-bottom: 75px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -13,7 +13,7 @@ const routes = [
     path: "/",
     name: "home",
     beforeEnter(to, from, next) {
-      next({ name: 'signin' })
+      next({ name: 'dashboard' })
     }
   },
   {
