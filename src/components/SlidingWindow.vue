@@ -4,7 +4,9 @@
     <div class="options-container">
       <SearchBar :input-handler="updateSearchTerm"/>
       <DropdownMenu/>
-    </div><PostsList/></div>
+    </div>
+    <PostsList/>
+  </div>
 </template>
 
 <script>

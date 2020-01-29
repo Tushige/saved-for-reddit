@@ -6,11 +6,11 @@
         <div class="gutter"></div>
         <div class="main-content">
           <div class="main-content_header">
-            <h1 class="title">Hi ThrowMeAway1999</h1>
+            <h1 class="title"><span class="title_colored">Hi</span> ThrowMeAway1999</h1>
             <p class="welcome-text">Tidying orders and relaxes the minds</p>
             <SearchBar :input-handler="updateSubredditSearchTerm"/>
           </div>
-          <SubredditList />
+          <SubredditList :is-subreddit-selected="isSubredditSelected"/>
         </div>
       </div>
       <SlidingWindow :is-active="isSubredditSelected" v-on:closed="closeSlidingWindow" />
@@ -106,6 +106,9 @@ export default {
 <style scoped>
 .dashboard {
   display: flex;
+}
+.title_colored {
+  color: rgb(255, 132, 0);
 }
 .main-view {
   flex-basis: 100%;

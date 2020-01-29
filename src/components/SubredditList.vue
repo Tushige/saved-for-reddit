@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="subreddit-list">
+    <div class="subreddit-list" :class="{active: isSubredditSelected}" :style="subredditListStyle">
       <h3>
         Subreddits: <span class="subreddits_count">{{ subreddits.length }}</span>
       </h3>
@@ -15,6 +15,7 @@
               :idx="idx"
               v-on:onImageLoad="onImageLoad"
               :isLoading="isLoading"
+              :container-width="containerWidth"
             />
         </div>
       </transition>
@@ -25,9 +26,18 @@
 <script>
 import { mapState, mapActions, mapGetters } from "vuex";
 import SubredditListItem from "./SubredditListItem";
+const _DEFAULT_WIDTH = 1000;
+const _ACTIVE_WIDTH = 900;
+
 export default {
   components: {
     SubredditListItem
+  },
+  props: {
+    isSubredditSelected: {
+      type: Boolean,
+      required: true
+    }
   },
   data() {
     return {
@@ -40,6 +50,14 @@ export default {
     }),
     isLoading() {
       return this.numImagesLoaded < this.subreddits.length;
+    },
+    containerWidth() {
+      return this.isSubredditSelected ? _ACTIVE_WIDTH : _DEFAULT_WIDTH;
+    },
+    subredditListStyle() {
+      return {
+        width: this.isSubredditSelected ? `780px` : `${_DEFAULT_WIDTH}px`
+      };
     }
   },
   methods: {
@@ -59,13 +77,12 @@ export default {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s ease-in;
+  transition: opacity 0.3s ease-in;
 }
 .fade-enter {
   opacity: 0;
 }
 .subreddit-list {
-  max-width: 1000px;
   margin: 0 auto;
 }
 .subreddit-items {

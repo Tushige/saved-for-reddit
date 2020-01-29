@@ -1,5 +1,5 @@
 <template>
-<div class="subredditlistitemcontainer">
+<div class="subredditlistitemcontainer" :style="styleObj">
   <transition name="fade">
     <div v-show="isLoading" class="skeleton-loader subreddit-item">
       <div class="line-dash"></div>
@@ -31,6 +31,10 @@ export default {
     isLoading: {
       type: Boolean,
       required: true
+    },
+    containerWidth: {
+      type: Number,
+      required: true
     }
   },
   data() {
@@ -48,6 +52,14 @@ export default {
         return false;
       }
       return this.activeSubreddit.id === this.subreddit.id;
+    },
+    styleObj() {
+      const styleObj = {
+        width: `${this.containerWidth / 5}px`,
+        height: `${this.containerWidth / 5}px`
+      };
+      console.log(styleObj);
+      return styleObj;
     }
   },
   methods: {
@@ -74,15 +86,18 @@ export default {
 </script>
 
 <style scoped>
+.subredditlistitemcontainer {
+  margin: 10px;
+  transition: width 0.3s ease-in;
+}
 .subreddit-item {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 4px;
   color: #fff;
-  margin: 10px;
   cursor: pointer;
   position: relative;
   overflow: hidden;

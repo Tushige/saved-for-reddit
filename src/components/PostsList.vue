@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="posts-list-slider">
     <div v-show="savedPosts.length < 1" class="no-posts-message">
       you have no saved posts
     </div>
@@ -34,6 +34,10 @@ export default {
 </script>
 
 <style scoped>
+.posts-list-slider {
+  height: 100%;
+  overflow-y: scroll;
+}
 .posts-list {
   overflow-y: scroll;
   width: 100%;
