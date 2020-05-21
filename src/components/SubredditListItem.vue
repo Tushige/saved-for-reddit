@@ -1,17 +1,22 @@
 <template>
-<div class="subredditlistitemcontainer" :style="styleObj">
-  <transition name="fade">
-    <div v-show="isLoading" class="skeleton-loader subreddit-item">
-      <div class="line-dash"></div>
-    </div>
-  </transition>
-  <transition name="fade">
-    <div v-show="!isLoading" class="subreddit-item" :class="{ active: isActive }" @click="clickHandler">
-      <img class="background" v-bind:src="imageUrl" ref="img"/>
-      <div class="subreddit-item__title">{{ subreddit.display_name }}</div>
-    </div>
-  </transition>
-</div>
+  <div class="subredditlistitemcontainer" :style="styleObj">
+    <transition name="fade">
+      <div v-show="isLoading" class="skeleton-loader subreddit-item">
+        <div class="line-dash"></div>
+      </div>
+    </transition>
+    <transition name="fade">
+      <div
+        v-show="!isLoading"
+        class="subreddit-item"
+        :class="{ active: isActive }"
+        @click="clickHandler"
+      >
+        <img class="background" v-bind:src="imageUrl" ref="img" />
+        <div class="subreddit-item__title">{{ subreddit.display_name }}</div>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -58,7 +63,6 @@ export default {
         width: `${this.containerWidth / 5}px`,
         height: `${this.containerWidth / 5}px`
       };
-      console.log(styleObj);
       return styleObj;
     }
   },

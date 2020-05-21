@@ -1,16 +1,18 @@
 <template>
   <div>
-    <TheHeader/>
+    <TheHeader />
     <div class="dashboard">
       <div class="main-view" :class="{ 'shared-view': isSubredditSelected }">
         <div class="gutter"></div>
         <div class="main-content">
           <div class="main-content_header">
-            <h1 class="title"><span class="title_colored">Hi</span> ThrowMeAway1999</h1>
+            <h1 class="title">
+              <span class="title_colored">Hi</span> ThrowMeAway1999
+            </h1>
             <p class="welcome-text">Tidying orders and relaxes the mind</p>
-            <SearchBar :input-handler="updateSubredditSearchTerm"/>
+            <SearchBar :input-handler="updateSubredditSearchTerm" />
           </div>
-          <SubredditList :is-subreddit-selected="isSubredditSelected"/>
+          <SubredditList :is-subreddit-selected="isSubredditSelected" />
         </div>
       </div>
       <SlidingWindow :is-active="isSubredditSelected" v-on:closed="closeSlidingWindow" />
@@ -71,10 +73,11 @@ export default {
       deselectSubreddit: "user/deselectSubreddit",
       setSubredditSearchTerm: "user/setSubredditSearchTerm"
     }),
-    fetchData() {
-      Promise.all([this.fetchUser(), this.fetchSubreddits(), this.fetchSavedPosts()]).then(() => {
-        this.isLoading = false;
-      });
+    async fetchData() {
+      await this.fetchUser();
+      await this.fetchSubreddits();
+      await this.fetchSavedPosts();
+      this.isLoading = false;
     },
     closeSlidingWindow() {
       this.deselectSubreddit();

@@ -86,8 +86,8 @@ export var api = axios.create({
 export function getUser() {
   return api.get(REDDIT_API_URL + "/api/v1/me");
 }
-export function getSavedPosts() {
-  return api.get(REDDIT_API_URL + "/user/IamNervS/saved");
+export function getSavedPosts(username) {
+  return api.get(REDDIT_API_URL + `/user/${username}/saved`);
 }
 export function getSubreddits() {
   return api.get(REDDIT_API_URL + "/subreddits/mine/subscriber");
