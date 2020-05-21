@@ -14,7 +14,9 @@ export default {
     },
     getSubreddits: state => {
       if (state.subredditSearchTerm) {
-        return state.subreddits.filter(subreddit => subreddit.display_name.includes(state.subredditSearchTerm));
+        return state.subreddits.filter(subreddit =>
+          subreddit.display_name.toLowerCase().includes(state.subredditSearchTerm)
+        );
       }
       return state.subreddits;
     }
@@ -40,7 +42,7 @@ export default {
       commit("setActiveSubreddit", null);
     },
     setSubredditSearchTerm({ commit }, searchTerm) {
-      commit("setSubredditSearchTerm", searchTerm)
+      commit("setSubredditSearchTerm", searchTerm);
     }
   },
   mutations: {
